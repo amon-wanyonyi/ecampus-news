@@ -4,3 +4,7 @@ from . import main
 @main.route('/')
 def index():
     return render_template('index.html')
+
+@main.route('/notifications')
+def notifications():
+    return render_template('notifications.html')
