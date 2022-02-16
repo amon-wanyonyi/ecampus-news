@@ -16,19 +16,7 @@
             </div>
         </div>
         <div class="col-md-4" style="display: unset;">
-            <div class="card pinned-news">
-                <div class="card-header bg-primary text-white text-center">
-                    Pinned news
-                </div>
-                <div class="card-body">
-                    {% for news in range(4) %}
-                    {% include "partials/pinned-news-card.html" %}
-                    {% if not loop.last %}
-                    <hr class="bg-primary my-2">
-                    {% endif %}
-                    {% endfor %}
-                </div>
-            </div>
+            {% include "partials/pinned-news.html" %}
         </div>
     </div>
 </section>

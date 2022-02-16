@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- body content here -->
+<section class="body py-5 px-2 px-lg-3">
+
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="fs-4 fw-bold pb-3">Lorem ipsum dolem</h1>
+            <div class="row">
+                <p class="text-muted">
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis laudantium, consectetur minus
+                    accusamus ratione, assumenda natus explicabo eligendi vel provident deserunt doloremque odit? Nulla
+                    doloremque, pariatur officiis quis a earum! Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Aut, amet mollitia commodi quia architecto sunt dignissimos, molestias eligendi quisquam officiis
+                    eum laudantium explicabo accusantium facilis tempora quod saepe nihil dolores?
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4" style="display: unset;">
+            {% include "partials/pinned-news.html" %}
+        </div>
+    </div>
+</section>
+<!-- end content here -->
+{% endblock %}
