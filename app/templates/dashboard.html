@@ -118,6 +118,11 @@
                                                 <td>{{notification.formatted_time}}</td>
                                                 <td>
                                                     <div>
+                                                        <a href="{{url_for('main.notification_emails', id=notification.id)}}" class="btn btn-sm" title="Send email to users">
+                                                            <span class="material-icons text-dark">
+                                                                email
+                                                            </span>
+                                                        </a>
                                                         <button class="btn btn-sm" data-bs-toggle="modal"
                                                             data-bs-target="#editBlogModal-{{notification.id}}">
                                                             <span class="material-icons text-primary">
