@@ -16,10 +16,6 @@ manager.add_command('server',Server)
 def make_shell_context():
     return dict(app = app,db = db, User = User, Role = Role, Notification = Notification)
 
-@manager.shell
-def make_shell_context():
-    return dict(app = app,db = db)
-
 @manager.command
 def seed():
     "Add seed data to the database."
