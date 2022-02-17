@@ -3,7 +3,7 @@ from flask import render_template, url_for, abort, request, redirect, flash
 from flask_login import login_required, current_user
 from ..models import Notification, User, Comment
 from .. import db
-from ..emails import mail_message
+from ..emails import mail_async_message, mail_message
 from .forms import BlogForm,CommentForm,ProfileForm,EditBlogForm
 
 
@@ -149,3 +149,19 @@ def notification_update(id):
         flash("Notification updated successfully", "success")
 
     return redirect(request.referrer or url_for('main.index'))    
+
+
+@main.route("/notification/<id>/email", methods=["GET"])
+@login_required
+def notification_emails(id):
+    blog = Notification.query.get(id)
+    if not blog:
+        abort(404)
+
+    users = User.query.order_by(User.created_at.desc()).limit(100).all()
+
+    for user in users:
+        mail_async_message("Ecampus Notification", "email/notification", user.email, blogs=[blog], user=user)
+    flash("Emails sent to users", "success")    
+
+    return redirect(request.referrer or url_for('main.index'))             

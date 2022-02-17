@@ -29,7 +29,7 @@ def send_async_email(app, msg):
 def mail_async_message(subject,template,to,**kwargs):
     app = current_app._get_current_object()
 
-    msg = Message(subject, sender=("Epic Blogs", sender_email), recipients=[to])
+    msg = Message(subject, sender=("ECampus", sender_email), recipients=[to])
     msg.html = render_template(template + ".html",**kwargs)
 
     thr = Thread(target=send_async_email, args=[app, msg])

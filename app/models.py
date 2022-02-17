@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
 
     @property
     def first_name(self):
-        return self.username.split()[0]
+        return self.username.split()[0].title()
 
     @property
     def avatar(self):
