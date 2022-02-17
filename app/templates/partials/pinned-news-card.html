@@ -1,0 +1,11 @@
+<div class="pinned-news-card">
+    <p class="text-muted mb-0 text-sm text-end">{{news.formatted_time}}</p>
+    <a href="{{url_for('main.notification_show', id=news.id)}}">
+        <h1 class="fs-5 fw-bold">
+            {{news.title}}
+        </h1>
+    </a>
+    <p class="description text-muted text-sm pb-2">
+        {{news.content | striptags | truncate(100)}}
+    </p>
+</div>
