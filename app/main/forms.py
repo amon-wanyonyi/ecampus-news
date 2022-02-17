@@ -20,5 +20,4 @@ class CommentForm(FlaskForm):
 class ProfileForm(FlaskForm):
     """Profile form"""
     email = EmailField('Email',validators=[InputRequired()])
-    name = StringField('Name',validators=[InputRequired()])
-    about = TextAreaField('About')
+    username = StringField('Name',validators=[InputRequired()])
