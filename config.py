@@ -12,8 +12,13 @@ class Config:
     
     SQLALCHEMY_DATABASE_URI = f'postgresql+psycopg2://{DB_USER}:{DB_PASSWORD}@localhost/{DB}'
 
-    SECRET_KEY = os.environ.get('SECRET_KEY') or ""
-
+    SECRET_KEY = os.environ.get('SECRET_KEY') or "Another@&SJ!$*@"
+ #  email configurations
+    MAIL_SERVER = 'smtp.googlemail.com'
+    MAIL_PORT = 587
+    MAIL_USE_TLS = True
+    MAIL_USERNAME = config('MAIL_USERNAME',default="")
+    MAIL_PASSWORD = config("MAIL_PASSWORD",default="")
 
 
 class ProdConfig(Config):
