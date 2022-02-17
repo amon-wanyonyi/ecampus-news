@@ -1,3 +1,4 @@
+from app.utils import pretty_date
 from flask_login import UserMixin
 from . import db, login_manager
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -26,7 +27,7 @@ class User(UserMixin, db.Model):
 
     @property
     def avatar(self):
-        return f"https://ui-avatars.com/api/?name={self.name.replace(' ',  '+')}"    
+        return f"https://ui-avatars.com/api/?name={self.username.replace(' ',  '+')}"    
 
     @property
     def is_admin(self):
@@ -71,7 +72,7 @@ class Notification(db.Model):
     @property
     def formatted_time(self):
         from datetime import datetime
-        return self.created_at.strftime("%b %d, %Y")
+        return pretty_date(self.created_at)
 
     @classmethod
     def get_all_notifications(cls):
