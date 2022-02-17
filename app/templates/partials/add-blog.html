@@ -1,0 +1,44 @@
+<!-- Modal -->
+<div class="modal fade" id="createPitchModal" data-bs-focus="false" tabindex="-1" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Notification</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <form action="{{url_for('main.notification_create')}}" method="POST" id="create-pitch-form"
+            enctype="multipart/form-data">
+            {{ blog_form.csrf_token }}
+            <div class="form-group">
+              <label for="" class="form-label text-sm">Title</label>
+              <input type="text" class="form-control" name="title" required>
+            </div>
+            <div class="form-group">
+              <label for="" class="form-label text-sm">Pin Notification</label>
+              <div class="form-check form-switch">
+                <input class="form-check-input" name="pinned" type="checkbox" id="flexSwitchCheckDefault">
+                <label class="form-check-label" for="flexSwitchCheckDefault">Pin Notification</label>
+              </div>
+            </div>
+            <div class="form-group pt-2">
+              <label for="" class="form-label text-sm">Content</label>
+              <textarea name="content" rows="4" required class="form-control ckeditor"></textarea>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Close</button>
+        <button type="submit" form="create-pitch-form" class="btn btn-primary px-4 text-white">Create</button>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  .form-label{
+    color: var(--bs-body-color) !important;
+  }
+</style>

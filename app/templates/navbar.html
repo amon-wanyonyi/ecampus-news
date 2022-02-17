@@ -27,6 +27,11 @@
 
                 {% if current_user.is_authenticated %}
                 <li class="nav-item px-2">
+                    <a class="nav-link" aria-current="page" href="{{url_for('main.notifications')}}">
+                        Notifications
+                    </a>
+                </li>
+                <li class="nav-item px-2">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         Hey {{current_user.first_name}}
@@ -36,7 +41,7 @@
                         {% if current_user.is_admin %}
                         <a class="dropdown-item bg-primary text-white" href="{{url_for('main.index')}}">Dashboard</a>
                         <a class="dropdown-item bg-primary text-white" href="#" data-bs-toggle="modal"
-                            data-bs-target="#createPitchModal">Create NOtification</a>
+                            data-bs-target="#createPitchModal">Create Notification</a>
                         {% endif %}
                         <div class="dropdown-divider bg-white mx-3"></div>
                         <a class="dropdown-item bg-primary text-white d-flex align-item-center"
