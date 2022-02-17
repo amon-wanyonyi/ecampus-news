@@ -10,6 +10,10 @@ from .forms import BlogForm,CommentForm,ProfileForm,EditBlogForm
 @main.route('/')
 def index():
     return render_template('index.html')
+  
+@main.route('/about')
+def about():
+    return render_template('about.html')
 
 @main.route('/notifications')
 @login_required
@@ -150,7 +154,7 @@ def notification_update(id):
 
     return redirect(request.referrer or url_for('main.index'))    
 
-
+ 
 @main.route("/notification/<id>/email", methods=["GET"])
 @login_required
 def notification_emails(id):
