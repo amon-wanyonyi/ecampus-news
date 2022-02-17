@@ -3,7 +3,7 @@
         Pinned news
     </div>
     <div class="card-body">
-        {% for news in range(4) %}
+        {% for news in pinned_notifications %}
         {% include "partials/pinned-news-card.html" %}
         {% if not loop.last %}
         <hr class="bg-primary my-2">

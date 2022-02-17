@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <h1 class="fs-4 fw-bold pb-3">Recent news</h1>
             <div class="row">
-                {% for news in range(6) %}
+                {% for news in notifications %}
                 <div class="col-md-6 pb-3">
                     {% include "partials/news-card.html" %}
                 </div>
