@@ -1,0 +1,12 @@
+<div class="news-card shadow rounded px-3 py-4">
+    <p class="text-muted pb-2 text-sm">{{news.formatted_time}}</p>
+    <h1 class="fw-bold fs-4 pb-2">
+        {{news.title}}
+    </h1>
+    <p class="description text-muted text-sm pb-3">
+        {{news.content | striptags | truncate(200)}}
+    </p>
+    <div class="text-end">
+        <a href="{{url_for('main.notification_show', id=news.id)}}" class="fw-bold">Read more</a>
+    </div>
+</div>
