@@ -9,7 +9,6 @@ class BlogForm(FlaskForm):
 
 class EditBlogForm(FlaskForm):
     title = StringField('Title', validators=[InputRequired()])
-    category = IntegerField('Category', validators=[InputRequired()])
     content = StringField('Content', validators=[InputRequired()])
     pinned = BooleanField('Pinned')
 
