@@ -15,7 +15,7 @@ h3{
 }
 .bg-image {
   /* The image used */
-  background-image: url("images/carousel1.jpg");
+  background-image: url("../images/carousel1.jpg");
 
   /* Add the blur effect */
   filter: blur(4px);
