@@ -1,6 +1,6 @@
 <div class="pinned-news-card">
-    <p class="text-muted mb-0 text-sm text-end">1 month ago</p>
-    <a href="#">
+    <p class="text-muted mb-0 text-sm text-end">{{news.formatted_time}}</p>
+    <a href="{{url_for('main.notification_show', id=news.id)}}">
         <h1 class="fs-5 fw-bold">
             {{news.title}}
         </h1>
