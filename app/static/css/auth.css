@@ -8,13 +8,11 @@ body{font-family: 'Times New Roman', Times, serif;}
 
 .fa{position:absolute;}
 
-.left-addon .fa{padding-top: 15px;font-size: 40px;padding-left: 8px;}
-
-.right-addon .fa{right:20px;padding:20px 10px 10px 10px;}
+.left-addon .fa{padding-top: 15px;font-size: 35px;padding-left: 8px;color:#008C8C;opacity:0.7 !important }
 
 .inner-addon input{margin-top: 10px;margin-right: 10px;width:90%;}
 
-.authinput{font-size: 20px !important;padding-left: 50px !important;width:70% !important;height:70px !important;border-top-right-radius: 20px !important;border-bottom-right-radius: 20px !important;border:1px solid black !important;}
+.authinput{font-size: 18px !important;padding-left: 50px !important;width:90% !important;height:60px !important;border-top-right-radius: 20px !important;border-bottom-right-radius: 20px !important;border:1px solid #ddd !important;}
 
 .authform{margin-left:200px;}
 
