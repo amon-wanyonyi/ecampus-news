@@ -7,7 +7,7 @@
     background: url(../images/back1\ .jpg) no-repeat center center/cover, rgba(0,0,0,0.5);
 
 }
-.btn{
+#home .btn{
     padding: 10px 36px;
     color: white;
     outline: none;
