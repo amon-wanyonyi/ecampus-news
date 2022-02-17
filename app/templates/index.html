@@ -1,7 +1,28 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<section class="body py-5 px-1 px-lg-3">
+<section id="home">
+    <div class="main">
+        
+        {%if quote%}
 
+        <h1>eCampus <span>News</span></h1>
+        <h2>Welcome to eCampus News</h2>
+        
+        <button class="btn">
+            LOGIN
+
+        
+    </div>
+      
+          {% endif %}</div>
+    
+            <div class="col-lg-4 home-img">
+               <img src="{{url_for('static',filename='images/back1.jpg')}}" > 
+    
+            </div>
+         
+    
+        
 </section>
 {% endblock %}
