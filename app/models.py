@@ -55,6 +55,9 @@ class Role(db.Model):
 
     users = db.relationship('User', backref="role", lazy="dynamic")
 
+    def __repr__(self):
+        return f'{self.name}'
+
 class Notification(db.Model):
     '''
     Notifications table

@@ -4,7 +4,7 @@ from flask_login import login_required, current_user
 from ..models import Notification, User, Comment
 from .. import db
 from ..emails import mail_message
-from .forms import BlogForm,CommentForm
+from .forms import BlogForm,CommentForm,ProfileForm,EditBlogForm
 
 
 @main.route('/')
@@ -58,3 +58,54 @@ def save_comment(id):
         flash("Your comment was saved successfully", "success")
 
     return redirect(request.referrer or url_for('main.index'))      
+
+@main.route('/dashboard', methods=["GET"])
+@login_required
+def dashboard():
+    if not current_user.is_admin:
+        abort(403)
+    notifications = Notification.get_all_notifications()
+    users = User.query.order_by(User.created_at.desc()).limit(100).all()
+    return render_template('dashboard.html', users=users, notifications=notifications)    
+
+@main.route('/profile', methods=["GET","POST"])
+@login_required
+def profile():
+    profile_form = ProfileForm()
+    if profile_form.validate_on_submit():
+        User.query.filter_by(id=current_user.id).update({'username':profile_form.name.data})
+        db.session.commit()
+        flash("Your details have been updated", "success")
+        return redirect(url_for('main.profile'))
+
+    return render_template('profile.html', form=profile_form, Comment = Comment)     
+
+
+# delete notification
+@main.route("/notification/<id>/delete", methods=["GET"])
+@login_required
+def delete_notification(id):
+    notification = Notification.query.get(id)
+    if not notification or notification.user_id is not current_user.id:
+        abort(404)
+    
+    Notification.delete_notification(id) 
+
+    return redirect(request.referrer or url_for('main.index'))  
+
+
+@main.route('/blog/<id>/update', methods=['POST'])
+@login_required
+def notification_update(id):
+    form = EditBlogForm()
+    blog = Notification.query.get(id)
+    if not blog:
+        abort(404)
+
+    if form.validate_on_submit():
+        Notification.query.filter_by(id=id).update({"title":form.title.data, "content":form.content.data, 
+            "pinned":form.pinned.data})
+        db.session.commit()
+        flash("Notification updated successfully", "success")
+
+    return redirect(request.referrer or url_for('main.index'))    
