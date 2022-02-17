@@ -7,17 +7,18 @@
 <!-- Content block -->
 {% block content %}
 
-<section id="home">
-    <div class="main">
-        
-        <h1>eCampus <span>News</span></h1>
-        <h2>Welcome to eCampus News</h2>
+<section id="home" class="position-relative">
+    <div class="overlay h-100 position-absolute top-0 end-0 right-0 start-0"></div>
+    <div class="main position-relative">
 
-        <button class="btn">
+        <h1 class="text-white">eCampus <span>News</span></h1>
+        <h2 class="text-white">Welcome to eCampus News</h2>
+
+        <a href="{{url_for('auth.login')}}" class="btn btn-primary">
             LOGIN 
+        </a>
+
     </div>
-          
+
 </section>
 {% endblock%}
-
-
