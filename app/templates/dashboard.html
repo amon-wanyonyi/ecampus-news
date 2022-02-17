@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- section latest pitches -->
+<section class="py-5 px-1 px-lg-3">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="row">
+                    <div class="col-sm-12 mb-3">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h2 class="fw-bold fs-3 text-center pb-4">Users</h2>
+                                <div class="table-responsive">
+                                    <table class="table table-responsive">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">#</th>
+                                                <th scope="col">Image</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Email </th>
+                                                <th scope="col">Role</th>
+                                                <th scope="col">Created At</th>
+                                                <th></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if users | length > 0 %}
+                                            {% for user in users %}
+                                            <tr>
+                                                <td>
+                                                    {{loop.index}}
+                                                </td>
+                                                <td>
+                                                    <img src="{{user.avatar}}" alt="{{user.name}}" height="30"
+                                                        width="30" class="avatar rounded-circle">
+                                                </td>
+                                                <td>
+                                                    {{user.username}}
+                                                </td>
+                                                <td>{{user.email}}</td>
+                                                <td>{{user.role}}</td>
+                                                <td>{{user.created_at.strftime("%b %d, %Y %H:%m")}}</td>
+                                                <td>
+                                                    <div>
+                                                        
+                                                        {% if current_user.id != user.id %}
+                                                        <button class="btn btn-sm" data-bs-toggle="modal"
+                                                            data-bs-target="#editUserModal-{{user.id}}">
+                                                            <span class="material-icons text-primary">
+                                                                edit
+                                                            </span>
+                                                        </button>
+                                                        <a href="{{url_for('main.delete_user', id=user.id)}}"
+                                                            class="btn btn-sm">
+                                                            <span class="material-icons text-danger">
+                                                                delete
+                                                            </span>
+                                                        </a>
+                                                        {% include "partials/edit-user.html" %}
+                                                        {% endif %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% else %}
+                                            <tr>
+                                                <td colspan="7" class="text-center">
+                                                    No users yet
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-12 mb-3">
+                        <div class="card h-100 shadow">
+                            <div class="card-body">
+                                <div class="d-flex">
+                                    <h2 class="fw-bold fs-3 text-center col">Notifications</h2>
+                                    <button class="btn btn-outline-primary px-4" data-bs-toggle="modal"
+                                        data-bs-target="#createPitchModal">
+                                        <span class="px-0">Create Notification</span>
+                                    </button>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-responsive mt-3">
+                                        <thead>
+                                            <tr class="">
+                                                <th scope="col">#</th>
+                                                <th scope="col">Title</th>
+                                                <th scope="col">Pinned</th>
+                                                <th scope="col">Comments </th>
+                                                <th scope="col">Created At</th>
+                                                <th scope="col"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if notifications | length > 0 %}
+                                            {% for notification in notifications %}
+                                            <tr>
+                                                <td>
+                                                    {{loop.index}}
+                                                </td>
+                                                <td>
+                                                    <a href="{{url_for('main.notification_show', id=notification.id)}}"
+                                                        class="fw-bold text-decoration-underline">
+                                                        {{notification.title | truncate(120)}}
+                                                    </a>
+                                                </td>
+                                                <td>
+                                                    {{notification.pinned}}
+                                                </td>
+                                                <td class="">{{notification.comments.count()}}</td>
+                                                <td>{{notification.formatted_time}}</td>
+                                                <td>
+                                                    <div>
+                                                        <a href="{{url_for('main.notification_emails', id=notification.id)}}" class="btn btn-sm" title="Send email to users">
+                                                            <span class="material-icons text-dark">
+                                                                email
+                                                            </span>
+                                                        </a>
+                                                        <button class="btn btn-sm" data-bs-toggle="modal"
+                                                            data-bs-target="#editBlogModal-{{notification.id}}">
+                                                            <span class="material-icons text-primary">
+                                                                edit
+                                                            </span>
+                                                        </button>
+                                                        <a href="{{url_for('main.delete_notification', id=notification.id)}}"
+                                                            class="btn btn-sm">
+                                                            <span class="material-icons text-danger">
+                                                                delete
+                                                            </span>
+                                                        </a>
+                                                        {% include "partials/edit-blog.html" %}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% else %}
+                                            <tr>
+                                                <td colspan="7" class="text-center">
+                                                    No notifications yet
+                                                </td>
+                                            </tr>
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end latest pitches -->
+{% endblock %}
+
+{% block scripts %}
+{{super()}}
+
+{% endblock %}

@@ -1,0 +1,72 @@
+{%extends 'base.html'%} {% import 'bootstrap/wtf.html' as wtf%}
+
+{%block content%}
+
+<div class="container create_form my-5">
+  <h1 class="text-info text-center">REGISTRATION FORM</h1>
+  <div class="row">
+      <div class="col-md-2"></div>
+      <div class="col-md-8">
+<form action="{{url_for('auth.register')}}" class="authform" method="POST" autocomplete="off">
+<div class="row">
+    <div class="form-group">
+    <div class="inner-addon left-addon">
+    <i class="fa fa-user"></i>
+<input class="form-control authinput" type="text" name="username" id="user" placeholder="Username" required>
+</div>
+</div>
+</div>
+
+<div class="row">
+    <div class="form-group">
+    <div class="inner-addon left-addon">
+    <i class="fa fa-envelope "></i>
+
+      <input class="form-control authinput" type="email" name="email" id="email" placeholder="Email Address" required>
+      </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group">
+    <div class="inner-addon left-addon">
+    <i class="fa fa-lock "></i>
+     <input class="form-control authinput" type="password" name="password" id="pass" placeholder="Password" required>
+</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="form-group">
+    <div class="inner-addon left-addon">
+    <i class="fa fa-lock"></i>
+       <input type="password" class="form-control authinput" name="confirmpassword" id="confPass" placeholder="Confirm Password" required>
+</div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2 mt-4">
+        <div class="form-group">
+        <button class="btn btn-success btn-lg authbutton" name="register" id="registerbtn" type="submit">Register</button>
+    </div>
+    </div>
+    <div class="col-md-1"></div>
+
+    <div class="col-md-8">
+         <div class="form-group mt-4">
+        <h5>Already have an account? <a href="{{url_for('auth.login')}}">Login</a></h5>
+    </div>
+    </div>
+
+</div>
+
+
+    </form>
+      </div>
+      <div class="col-md-2"></div>
+  </div>
+
+
+</div>
+{%endblock%}

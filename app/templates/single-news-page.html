@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- body content here -->
+<section class="body py-5 px-2 px-lg-3">
+
+    <div class="row">
+        <div class="col-md-8">
+            <p class="text-muted mb-3">{{notification.formatted_time}}</p>
+            <h1 class="fs-4 fw-bold pb-3">{{notification.title}}</h1>
+            <div class="row">
+                <p class="text-muted">
+                    {{notification.content|safe}}
+                </p>
+            </div>
+        </div>
+        <div class="col-md-4" style="display: unset;">
+            {% if current_user and  current_user.is_authenticated %}
+                <h2 class="text-center">Post your comment</h2>
+                <form action="{{url_for('main.save_comment', id=notification.id)}}" method="POST" class="pt-4">
+                    {{commentForm.csrf_token}}
+                    <textarea name="comment" class="form-control"
+                        rows="4"></textarea>
+                    <div class="pt-4 text-center">
+                        <button class="btn  px-4 border-primary text-primary">
+                            <span class="px-3">Post</span>
+                        </button>
+                    </div>
+                </form>
+                {% else %}
+                <div class="text-center">
+                    <p class="text-center mb-4">Login to post your comment</p>
+
+                    <a href="{{url_for('main.index')}}" class="btn-primary text-white px-4 py-2"><span class="px-2">Login</span></a>
+                </div>
+                {% endif %}
+        </div>
+    </div>
+
+    <div class="py-5">
+        <div class="row">
+            <div class="col-md-7 order-2 order-md-2">
+                <h2 class="text-white">
+                    Comments
+                </h2>
+                {% for comment in notification.comments.order_by(Comment.created_at.desc()).all() %}
+                    {% include "partials/comment-card.html" %}
+                {% endfor %}
+                {% if notification.comments.count() == 0 %}
+                    <p class="pt-3">No comments yet</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>
+<!-- end content here -->
+{% endblock %}

@@ -1,6 +1,56 @@
+#home{
+    display: flex;
+    background-color: rgba(0,0,0,0.5) !important;
+    height: 84vh !important; 
+    justify-content: center;
+    align-items: center;
+    background: url(../images/back1\ .jpg) no-repeat center center/cover, rgba(0,0,0,0.5);
 
-.menu_image {width: 100%;border-top-left-radius: 20px;border-top-right-radius: 20px;}
+}
+#home .btn{
+    padding: 10px 36px;
+    color: white;
+    outline: none;
+}
+.main{
+    z-index: 10;
+}
+/* .btn:hover{
+    cursor: pointer;
+    color: black;
+    background-color:white;
+    box-shadow: 0 0 5px wheat, 0 0 10px wheat, 0 0 16px wheat;
+    font-weight: bold;
+} */
+/* .headings{
+    font-family: sans-serif;
+    font-size: 3rem;
+    text-align: center;
+    margin: 40px 0px;
+} */
+/* .main{
+    display: flex;
+    flex-direction: column;
 
-.show_card {border-radius: 20px !important;border: 1px solid #ddd;margin: auto;width: 98%;}
+   
+    align-items: center;
+    position: absolute;
+    top: 50%;
+    right: 20%;
+} */
+/* #home::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background: url(back1.jpg) no-repeat center center/cover;
+    height: 700px;
+    width: 100vw;
+    z-index: -1;
+    opacity: .8;
+} */
 
-.order_button {width: 80%;}
+.overlay{
+    background-color: rgba(0,0,0,0.4) !important;
+    z-index: 0;
+}

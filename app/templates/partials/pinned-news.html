@@ -1,0 +1,16 @@
+<div class="card pinned-news  d-none d-sm-block">
+    <div class="card-header bg-primary text-white text-center">
+        Pinned news
+    </div>
+    <div class="card-body">
+        {% for news in pinned_notifications %}
+        {% include "partials/pinned-news-card.html" %}
+        {% if not loop.last %}
+        <hr class="bg-primary my-2">
+        {% endif %}
+        {% endfor %}
+        {% if pinned_notifications|length == 0 %}
+        <p class="mt-3 text-center">No pinned notification yet</p>
+        {% endif %}
+    </div>
+</div>
