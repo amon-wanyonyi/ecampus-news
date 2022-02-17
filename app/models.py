@@ -23,7 +23,7 @@ class User(UserMixin, db.Model):
 
     @property
     def first_name(self):
-        return self.username.split()[0]
+        return self.username.split()[0].title()
 
     @property
     def avatar(self):
@@ -40,6 +40,12 @@ class User(UserMixin, db.Model):
     def verify_password(self, password):
         return check_password_hash(self.password_secure, password)
 
+    @classmethod
+    def delete_user(cls, id):
+        user = cls.query.filter_by(id=id).first()
+        db.session.delete(user)
+        db.session.commit()    
+
     def __repr__(self):
         return f'User: {self.username}'
 
@@ -54,6 +60,10 @@ class Role(db.Model):
     name = db.Column(db.String(255))
 
     users = db.relationship('User', backref="role", lazy="dynamic")
+
+    @classmethod
+    def get_all_roles(cls):
+        return cls.query.all()
 
     def __repr__(self):
         return f'{self.name}'

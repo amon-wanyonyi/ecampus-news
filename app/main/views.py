@@ -3,7 +3,7 @@ from flask import render_template, url_for, abort, request, redirect, flash
 from flask_login import login_required, current_user
 from ..models import Notification, User, Comment
 from .. import db
-from ..emails import mail_message
+from ..emails import mail_async_message, mail_message
 from .forms import BlogForm,CommentForm,ProfileForm,EditBlogForm
 
 
@@ -83,7 +83,34 @@ def profile():
         flash("Your details have been updated", "success")
         return redirect(url_for('main.profile'))
 
-    return render_template('profile.html', form=profile_form, Comment = Comment)     
+    return render_template('profile.html', form=profile_form, Comment = Comment) 
+
+@main.route('/user/<id>/update', methods=["POST"])
+@login_required
+def user_update(id):
+    user = User.query.get(id)
+    if not user:
+        abort(404)
+
+    profile_form = ProfileForm()
+    if profile_form.validate_on_submit():
+        role_id = request.form['role_id'] or user.role_id
+        User.query.filter_by(id=user.id).update({'username':profile_form.username.data, 'role_id': role_id})
+        db.session.commit()
+        flash("User details have been updated", "success")
+    return redirect(url_for('main.dashboard'))      
+
+
+@main.route("/user/<id>/delete", methods=["GET"])
+@login_required
+def delete_user(id):
+    user = User.query.get(id)
+    if not user or user.id is current_user.id:
+        abort(404)
+    
+    User.delete_user(id) 
+
+    return redirect(request.referrer or url_for('main.dashboard'))          
 
 @main.route('/profile/update-password', methods=["POST"])
 @login_required
@@ -126,3 +153,19 @@ def notification_update(id):
         flash("Notification updated successfully", "success")
 
     return redirect(request.referrer or url_for('main.index'))    
+
+ 
+@main.route("/notification/<id>/email", methods=["GET"])
+@login_required
+def notification_emails(id):
+    blog = Notification.query.get(id)
+    if not blog:
+        abort(404)
+
+    users = User.query.order_by(User.created_at.desc()).limit(100).all()
+
+    for user in users:
+        mail_async_message("Ecampus Notification", "email/notification", user.email, blogs=[blog], user=user)
+    flash("Emails sent to users", "success")    
+
+    return redirect(request.referrer or url_for('main.index'))             

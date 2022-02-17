@@ -1,0 +1,44 @@
+<!-- Modal -->
+<div class="modal fade" id="editUserModal-{{user.id}}" data-bs-focus="false" tabindex="-1"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="">
+                    <form action="{{url_for('main.user_update', id=user.id)}}" method="POST"
+                        id="update-form-{{user.id}}" enctype="multipart/form-data">
+                        {{ blog_form.csrf_token }}
+                        <div class="form-group">
+                            <label for="" class="form-label text-sm">Email</label>
+                            <input type="text" class="form-control" name="email" required value="{{user.email}}"
+                                readonly>
+                        </div>
+                        <div class="form-group">
+                            <label for="" class="form-label text-sm">Username</label>
+                            <input type="text" class="form-control" name="username" placeholder="john doe"
+                            value="{{user.username}}">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="" class="form-label text-sm">Role</label>
+                            <select name="role_id" id="" class="form-select" required>
+                                {% for role in roles %}
+                                <option value="{{role.id}}" {% if user.role_id == role.id %} selected {% endif %}>{{role.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary px-4" data-bs-dismiss="modal">Close</button>
+                <button type="submit" form="update-form-{{user.id}}" class="btn btn-primary px-4">Update</button>
+            </div>
+        </div>
+    </div>
+</div>

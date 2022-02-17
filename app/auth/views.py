@@ -23,7 +23,7 @@ def register():
 
         login_user(new_post)
         flash("Your account was created successfully","success")
-        return redirect(request.args.get('next') or url_for('main.navigations'))
+        return redirect(request.args.get('next') or url_for('main.notifications'))
 
     return render_template('auth/register.html')
 
