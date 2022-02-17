@@ -42,7 +42,24 @@
                                                 <td>{{user.role}}</td>
                                                 <td>{{user.created_at.strftime("%b %d, %Y %H:%m")}}</td>
                                                 <td>
-
+                                                    <div>
+                                                        
+                                                        {% if current_user.id != user.id %}
+                                                        <button class="btn btn-sm" data-bs-toggle="modal"
+                                                            data-bs-target="#editUserModal-{{user.id}}">
+                                                            <span class="material-icons text-primary">
+                                                                edit
+                                                            </span>
+                                                        </button>
+                                                        <a href="{{url_for('main.delete_user', id=user.id)}}"
+                                                            class="btn btn-sm">
+                                                            <span class="material-icons text-danger">
+                                                                delete
+                                                            </span>
+                                                        </a>
+                                                        {% include "partials/edit-user.html" %}
+                                                        {% endif %}
+                                                    </div>
                                                 </td>
                                             </tr>
                                             {% endfor %}
@@ -64,7 +81,7 @@
                             <div class="card-body">
                                 <div class="d-flex">
                                     <h2 class="fw-bold fs-3 text-center col">Notifications</h2>
-                                    <button class="btn border-primary px-4" data-bs-toggle="modal"
+                                    <button class="btn btn-outline-primary px-4" data-bs-toggle="modal"
                                         data-bs-target="#createPitchModal">
                                         <span class="px-0">Create Notification</span>
                                     </button>
@@ -97,7 +114,7 @@
                                                 <td>
                                                     {{notification.pinned}}
                                                 </td>
-                                                <td class="text-center">{{notification.comments.count()}}</td>
+                                                <td class="">{{notification.comments.count()}}</td>
                                                 <td>{{notification.formatted_time}}</td>
                                                 <td>
                                                     <div>

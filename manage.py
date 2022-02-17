@@ -27,7 +27,8 @@ def seed():
 @app.context_processor
 def inject_user():
     blog_form = BlogForm()
-    return dict(blog_form=blog_form)
+    roles=Role.get_all_roles()
+    return dict(blog_form=blog_form, roles=roles)
 
 migrate = Migrate(app,db)
 manager.add_command('db',MigrateCommand)
