@@ -18,6 +18,18 @@ class User(UserMixin, db.Model):
     def password(self):
         raise AttributeError('You cannot read the password attribute')
 
+    @property
+    def first_name(self):
+        return self.username.split()[0]
+
+    @property
+    def avatar(self):
+        return f"https://ui-avatars.com/api/?name={self.name.replace(' ',  '+')}"    
+
+    @property
+    def is_admin(self):
+        return self.role_id == 1      
+
     @password.setter
     def password(self, password):
         self.password_secure = generate_password_hash(password)
@@ -28,11 +40,10 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return f'User: {self.username}'
 
-
-@login_manager.user_loader
-def load_user(user_id):
-    """call back function that retrieves a user when a unique identifier is passed"""
-    return User.query.get(int(user_id))
+    @login_manager.user_loader
+    def load_user(user_id):
+        """call back function that retrieves a user when a unique identifier is passed"""
+        return User.query.get(int(user_id))
 
 class Role(db.Model):
     __tablename__ = 'roles'
