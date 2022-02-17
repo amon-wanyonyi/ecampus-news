@@ -1,8 +1,8 @@
 #home{
     display: flex;
     flex-direction: column;
-    background-color: rgba(0,0,0,0.5);
-    height: 700px; 
+    background-color: rgba(0,0,0,0.5) !important;
+    height: 80vh !important; 
     justify-content: center;
     align-items: center;
     color: sienna;
