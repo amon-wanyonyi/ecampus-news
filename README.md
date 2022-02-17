@@ -1,7 +1,14 @@
-# Pizza Shop
+# eCampus News
 
 ## Description
+This is a a flask application used to pass information and news to various campus students online.
 
+## Collaboraters
+1. Winfred Kyalo
+2. James Muriithi
+3. Amon Wanyonyi
+4. David Rono
+5. Agnes Nafula
 # Setup / Installation
 * clone the repo:
 
@@ -48,3 +55,6 @@ The following languages have been used on this project:
 * Bootstrap
 * Flask
 * Python
+## License
+* *MIT License:*
+* Copyright (c) 2022 **eCampusnews@gmail.com**
