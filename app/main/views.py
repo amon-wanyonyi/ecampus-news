@@ -72,14 +72,27 @@ def dashboard():
 @login_required
 def profile():
     profile_form = ProfileForm()
+    # return profile_form.data
     if profile_form.validate_on_submit():
-        User.query.filter_by(id=current_user.id).update({'username':profile_form.name.data})
+        User.query.filter_by(id=current_user.id).update({'username':profile_form.username.data})
         db.session.commit()
         flash("Your details have been updated", "success")
         return redirect(url_for('main.profile'))
 
     return render_template('profile.html', form=profile_form, Comment = Comment)     
 
+@main.route('/profile/update-password', methods=["POST"])
+@login_required
+def password_update():
+    old_password = request.form['old_password']
+    password = request.form['password']
+    if current_user.verify_password(old_password):
+        User.query.filter_by(id=current_user.id).password = password
+        db.session.commit()
+        flash("Your password has been updated", "success")
+    else:
+        flash("Please provide the correct old password", "error")    
+    return redirect(url_for('main.profile')) 
 
 # delete notification
 @main.route("/notification/<id>/delete", methods=["GET"])
