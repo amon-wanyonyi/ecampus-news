@@ -154,7 +154,7 @@ def notification_update(id):
 
     return redirect(request.referrer or url_for('main.index'))    
 
-
+ 
 @main.route("/notification/<id>/email", methods=["GET"])
 @login_required
 def notification_emails(id):
