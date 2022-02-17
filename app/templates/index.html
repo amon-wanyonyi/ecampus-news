@@ -1,9 +1,15 @@
-{% extends 'base.html' %}
-
+{%extends 'base.html'%}
+<!-- Styles block -->
+{% block styles%}
+{{ super() }}
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{% endblock %}
+<!-- Content block -->
 {% block content %}
+
 <section id="home">
     <div class="main">
-        
+
         {%if quote%}
 
         <h1>eCampus <span>News</span></h1>
@@ -16,13 +22,6 @@
     </div>
       
           {% endif %}</div>
-    
-            <div class="col-lg-4 home-img">
-               <img src="{{url_for('static',filename='images/back1.jpg')}}" > 
-    
-            </div>
-         
-    
-        
-</section>
-{% endblock %}
+{% endblock%}
+
+
