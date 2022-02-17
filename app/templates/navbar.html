@@ -1,42 +1,65 @@
 <!-- navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary w-100 px-1 px-lg-3">
-  <div class="container-fluid">
-      <a class="navbar-brand" href="/">
-          <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo" class="img-fluid">
-      </a>
-      <div>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/">
+            <img src="{{url_for('static', filename='images/logo.png')}}" alt="Logo" class="img-fluid">
+        </a>
+        <div>
 
-          <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-              aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-          </button>
-      </div>
-      <div class="collapse navbar-collapse bg-primary" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mt-4 mt-lg-0">
-              <li class="nav-item px-2">
-                  <a class="nav-link active" aria-current="page" href="/">
-                      Home
-                  </a>
-              </li>
-              <li class="nav-item px-2">
-                  <a class="nav-link" aria-current="page" href="/">
-                      About Us
-                  </a>
-              </li>
+            <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse bg-primary" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mt-4 mt-lg-0">
+                <li class="nav-item px-2">
+                    <a class="nav-link active" aria-current="page" href="/">
+                        Home
+                    </a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" aria-current="page" href="/">
+                        About Us
+                    </a>
+                </li>
 
-              <li class="nav-item px-2">
-                  <a class="nav-link" aria-current="page" href="{{url_for('auth.login')}}">
-                      Login
-                  </a>
-              </li>
-              <li class="nav-item px-2">
-                  <a class="nav-link" aria-current="page" href="{{url_for('auth.register')}}">
-                      Signup
-                  </a>
-              </li>
-          </ul>
-      </div>
-  </div>
+                {% if current_user.is_authenticated %}
+                <li class="nav-item px-2">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Hey {{current_user.first_name}}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-end bg-primary" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item bg-primary text-white" href="{{url_for('main.index')}}">Profile</a>
+                        {% if current_user.is_admin %}
+                        <a class="dropdown-item bg-primary text-white" href="{{url_for('main.index')}}">Dashboard</a>
+                        <a class="dropdown-item bg-primary text-white" href="#" data-bs-toggle="modal"
+                            data-bs-target="#createPitchModal">Create NOtification</a>
+                        {% endif %}
+                        <div class="dropdown-divider bg-white mx-3"></div>
+                        <a class="dropdown-item bg-primary text-white d-flex align-item-center"
+                            href="{{url_for('auth.logout')}}">
+                            Logout
+                            <span class="material-icons fs-4 text-white ps-2">logout</span>
+                        </a>
+                    </div>
+                </li>
+                {% else %}
+                <li class="nav-item px-2">
+                    <a class="nav-link" aria-current="page" href="{{url_for('auth.login')}}">
+                        Login
+                    </a>
+                </li>
+                <li class="nav-item px-2">
+                    <a class="nav-link" aria-current="page" href="{{url_for('auth.register')}}">
+                        Signup
+                    </a>
+                </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
 </nav>
 <!-- end navbar -->
